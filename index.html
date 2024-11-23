@@ -852,15 +852,17 @@
       </section>
       <!-- /Testimonials Section -->
 
-      <!-- Portfolio Section -->
+      <!-- Calculate Section -->
 
-      <section id="calculate" class="portfolio section flex justify-center">
-        <div class="flex justify-center">
-          <!-- Section Title -->
-          <div
-            class="bg-gray-100 flex justify-center items-center min-h-screen"
-          >
-            <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-lg">
+      <section id="multiForm" class="portfolio section flex justify-center">
+        <div class="flex w-full justify-center">
+          <!-- Main Form Container -->
+          <div class="w-full flex flex-col items-center min-h-screen">
+            <!-- Transportation Form -->
+            <form
+              id="transportationForm"
+              class="bg-white shadow-md rounded-lg p-8 w-full max-w-lg mb-10"
+            >
               <h1 class="text-2xl font-bold mb-6 text-gray-800">
                 Transportation
               </h1>
@@ -899,6 +901,7 @@
                   id="transportType"
                   name="transportType"
                   class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  onchange="handleTransportTypeChange(this)"
                 >
                   <option value="" disabled selected>
                     Select transportation type
@@ -909,6 +912,64 @@
                   <option value="bicycle">Bicycle</option>
                   <option value="walking">Walking</option>
                 </select>
+              </div>
+
+              <!-- Car-Specific Fields -->
+              <div id="carFields" class="hidden">
+                <!-- Engine Volume -->
+                <div class="mb-4">
+                  <label
+                    for="engineVolume"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >Engine Volume (in cc)</label
+                  >
+                  <input
+                    type="number"
+                    id="engineVolume"
+                    name="engineVolume"
+                    min="0"
+                    class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Enter engine volume"
+                  />
+                </div>
+
+                <!-- Old or New -->
+                <div class="mb-4">
+                  <label
+                    for="carCondition"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >Condition</label
+                  >
+                  <select
+                    id="carCondition"
+                    name="carCondition"
+                    class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <option value="" disabled selected>Select condition</option>
+                    <option value="old">Old</option>
+                    <option value="new">New</option>
+                  </select>
+                </div>
+
+                <!-- Fuel Type -->
+                <div class="mb-4">
+                  <label
+                    for="fuelType"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >Fuel Type</label
+                  >
+                  <select
+                    id="fuelType"
+                    name="fuelType"
+                    class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <option value="" disabled selected>Select fuel type</option>
+                    <option value="gasoline">Gasoline</option>
+                    <option value="diesel">Diesel</option>
+                    <option value="electric">Electric</option>
+                    <option value="hybrid">Hybrid</option>
+                  </select>
+                </div>
               </div>
 
               <!-- Distance Field -->
@@ -931,11 +992,245 @@
               <!-- Submit Button -->
               <button
                 type="submit"
-                class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                class="w-full bg-[#028374] text-white hover:bg-[#2b9e90] font-medium py-2 rounded-lg"
               >
                 Calculate Carbon Footprint
               </button>
-            </div>
+            </form>
+
+            <!-- Shopping Form -->
+            <form
+              id="shoppingForm"
+              class="bg-white shadow-md rounded-lg p-8 w-full max-w-lg mb-10"
+            >
+              <h1 class="text-2xl font-bold mb-6 text-gray-800">Shopping</h1>
+
+              <!-- Product Type -->
+              <div class="mb-4">
+                <label
+                  for="productType"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Type of Product</label
+                >
+                <select
+                  id="productType"
+                  name="productType"
+                  class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="" disabled selected>
+                    Select product type
+                  </option>
+                  <option value="clothing">Clothing</option>
+                  <option value="food">Food</option>
+                  <option value="electronics">Electronics</option>
+                  <option value="furniture">Furniture</option>
+                </select>
+              </div>
+
+              <!-- Country of Origin -->
+              <div class="mb-4">
+                <label
+                  for="originCountry"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Produced In</label
+                >
+                <select
+                  id="originCountry"
+                  name="originCountry"
+                  class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="" disabled selected>Select country</option>
+                  <option value="local">Azerbaijan</option>
+                  <option value="china">China</option>
+                  <option value="usa">USA</option>
+                  <option value="turkey">Turkey</option>
+                </select>
+              </div>
+
+              <!-- Packaging -->
+              <div class="mb-4">
+                <label
+                  for="packaging"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Packaging</label
+                >
+                <select
+                  id="packaging"
+                  name="packaging"
+                  class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="" disabled selected>Select packaging</option>
+                  <option value="plastic">Plastic</option>
+                  <option value="paper">Paper</option>
+                  <option value="none">No Package</option>
+                </select>
+              </div>
+
+              <!-- Weight of Product -->
+              <div class="mb-4">
+                <label
+                  for="productWeight"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Weight (kg)</label
+                >
+                <input
+                  type="number"
+                  id="productWeight"
+                  name="productWeight"
+                  min="0"
+                  class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter weight in kilograms"
+                />
+              </div>
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                class="w-full bg-[#028374] text-white hover:bg-[#2b9e90] font-medium py-2 rounded-lg"
+              >
+                Submit Shopping Data
+              </button>
+            </form>
+
+            <!-- Lifestyle Form -->
+            <form
+              id="lifestyleForm"
+              class="bg-white shadow-md rounded-lg p-8 w-full max-w-lg"
+            >
+              <h1 class="text-2xl font-bold mb-6 text-gray-800">Lifestyle</h1>
+
+              <!-- Meat Consumption -->
+              <div class="mb-4">
+                <label
+                  for="meatType"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Meat Consumption</label
+                >
+                <select
+                  id="meatType"
+                  name="meatType"
+                  class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  onchange="handleMeatTypeChange(this)"
+                >
+                  <option value="" disabled selected>Select meat type</option>
+                  <option value="beef">Beef</option>
+                  <option value="chicken">Chicken</option>
+                  <option value="fish">Fish</option>
+                </select>
+              </div>
+              <div id="meatWeightField" class="hidden">
+                <label
+                  for="meatWeight"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Weight of Meat (kg/week)</label
+                >
+                <input
+                  type="number"
+                  id="meatWeight"
+                  name="meatWeight"
+                  min="0"
+                  class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter weight in kilograms"
+                />
+              </div>
+
+              <!-- Food Waste -->
+              <div class="mb-4">
+                <label
+                  for="foodWaste"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Food Waste (kg/week)</label
+                >
+                <input
+                  type="number"
+                  id="foodWaste"
+                  name="foodWaste"
+                  min="0"
+                  class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter weight in kilograms"
+                />
+              </div>
+
+              <!-- Recycling -->
+              <div class="mb-4">
+                <label
+                  for="recycling"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Do You Recycle?</label
+                >
+                <select
+                  id="recycling"
+                  name="recycling"
+                  class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="" disabled selected>Select option</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+
+              <!-- Utilities Consumption -->
+              <h2 class="text-lg font-medium mb-4">Utilities Consumption</h2>
+
+              <!-- Water -->
+              <div class="mb-4">
+                <label
+                  for="waterConsumption"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Water (liters/day)</label
+                >
+                <input
+                  type="number"
+                  id="waterConsumption"
+                  name="waterConsumption"
+                  min="0"
+                  class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter water consumption"
+                />
+              </div>
+
+              <!-- Gas -->
+              <div class="mb-4">
+                <label
+                  for="gasConsumption"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Gas (m³/month)</label
+                >
+                <input
+                  type="number"
+                  id="gasConsumption"
+                  name="gasConsumption"
+                  min="0"
+                  class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter gas consumption"
+                />
+              </div>
+
+              <!-- Electricity -->
+              <div class="mb-4">
+                <label
+                  for="electricityConsumption"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Electricity (kWh/month)</label
+                >
+                <input
+                  type="number"
+                  id="electricityConsumption"
+                  name="electricityConsumption"
+                  min="0"
+                  class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter electricity consumption"
+                />
+              </div>
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                class="w-full bg-[#028374] text-white hover:bg-[#2b9e90] font-medium py-2 rounded-lg"
+              >
+                Submit Lifestyle Data
+              </button>
+            </form>
           </div>
         </div>
       </section>
@@ -1668,6 +1963,102 @@
 
     <!-- Preloader -->
     <div id="preloader"></div>
+
+    <script>
+      function handleTransportTypeChange(selectElement) {
+        const carFields = document.getElementById("carFields");
+        if (selectElement.value === "car") {
+          carFields.classList.remove("hidden");
+        } else {
+          carFields.classList.add("hidden");
+        }
+      }
+
+      // backend
+      document
+        .getElementById("transportationForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const formData = new FormData(this);
+          const data = {};
+          formData.forEach((value, key) => {
+            data[key] = value;
+          });
+
+          // Send data to the backend
+          fetch("https://your-backend-url.com/api/transportation", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Failed to submit form");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log("Form submitted successfully:", data);
+              alert("Form submitted successfully!");
+            })
+            .catch((error) => {
+              console.error("Error submitting form:", error);
+              alert("Failed to submit the form");
+            });
+        });
+
+      // Handle showing/hiding car-specific fields based on transport type
+      function handleTransportTypeChange(select) {
+        const carFields = document.getElementById("carFields");
+        if (select.value === "car") {
+          carFields.classList.remove("hidden");
+        } else {
+          carFields.classList.add("hidden");
+        }
+      }
+
+      // Handle showing/hiding the meat weight field based on meat type selection
+      function handleMeatTypeChange(select) {
+        const meatWeightField = document.getElementById("meatWeightField");
+        if (select.value) {
+          meatWeightField.classList.remove("hidden");
+        } else {
+          meatWeightField.classList.add("hidden");
+        }
+      }
+
+      // Handle form submissions (Transportation, Shopping, and Lifestyle)
+      document.addEventListener("DOMContentLoaded", () => {
+        // Add event listeners for each form
+        const transportationForm =
+          document.getElementById("transportationForm");
+        const shoppingForm = document.getElementById("shoppingForm");
+        const lifestyleForm = document.getElementById("lifestyleForm");
+
+        const handleFormSubmission = (event) => {
+          event.preventDefault(); // Prevent default form submission
+
+          const form = event.target;
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData.entries());
+
+          // Log form data for now (replace with actual logic, e.g., API call)
+          console.log("Form submitted:", form.id, data);
+
+          // Display success message (temporary)
+          alert(
+            `Form "${form.id}" submitted successfully! Check console for data.`
+          );
+        };
+
+        transportationForm.addEventListener("submit", handleFormSubmission);
+        shoppingForm.addEventListener("submit", handleFormSubmission);
+        lifestyleForm.addEventListener("submit", handleFormSubmission);
+      });
+    </script>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
