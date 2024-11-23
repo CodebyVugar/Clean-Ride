@@ -213,9 +213,9 @@ a.google {
 #verify-otp {
     background-color: #008374;
     color: white;
-    padding: 10px 20px;
     cursor: pointer;
     border: none;
+    padding: 5px;
     border-radius: 5px;
     margin-top: 10px;
 }
@@ -223,3 +223,37 @@ a.google {
 #verify-otp:hover {
     background-color: #004e44;
 }
+/* The OTP field is initially hidden */
+.otp-field {
+    display: none;
+}
+
+.otp-field input {
+    width: 80%;
+    display: inline-block;
+}
+
+.otp-field button {
+    display: inline-block;
+    background-color: #008374;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.otp-field button:hover {
+    background-color: #005a47;
+}
+
+.signup-button,
+#signup-button {
+    background-color: #008374;
+    color: white;
+    cursor: pointer;
+}
+
+.signup-button:hover,
+#signup-button:hover {
+    background-color: #005a47;
+}
+
