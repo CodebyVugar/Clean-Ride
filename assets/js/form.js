@@ -47,8 +47,8 @@ links.forEach(link => {
 
 
 loginForm.addEventListener("submit", function (e) {
-
     e.preventDefault();  // Prevent the form from being submitted automatically
+
     const email = document.querySelector(".login input[type='email']").value;
     const password = document.querySelector(".login input[type='password']").value;
 
@@ -69,6 +69,8 @@ loginForm.addEventListener("submit", function (e) {
     .then(text => {
         console.log("Backend response:", text);  // Log the backend response for debugging
         if (text.includes("success")) {
+            // Store the email in localStorage upon successful login
+            localStorage.setItem('userEmail', email);
             alert("Login successful!");
             window.location.replace("index.html");  // Redirect to index.html on successful login
         } else {
@@ -81,7 +83,14 @@ loginForm.addEventListener("submit", function (e) {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const userEmail = localStorage.getItem('userEmail');  // Get the stored email
 
+    if (userEmail) {
+        // Display the email inside the <li> element
+        document.getElementById('mail-name').textContent = userEmail;
+    }
+});
 
 
 // Forget Password form submit handler
