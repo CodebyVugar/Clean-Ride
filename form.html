@@ -1,143 +1,165 @@
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Login and Signup Form</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Responsive Login and Signup Form</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="/assets/css/form.css">
+        <!-- CSS -->
+        <link rel="stylesheet" href="/assets/css/form.css">
 
-    <!-- Boxicons CSS -->
-    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-</head>
+        <!-- Boxicons CSS -->
+        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    </head>
 
-<body>
-    <section class="container forms">
-        <!-- Login Form -->
-        <div class="form login">
-            <div class="form-content">
-                <header>Login</header>
-                <form action="#">
-                    <div class="field input-field">
-                        <input type="email" placeholder="Email" class="input">
-                    </div>
+    <body>
+        <section class="container forms">
+            <!-- Login Form -->
+            <div class="form login">
+                <div class="form-content">
+                    <header>Login</header>
+                    <form action="#">
+                        <div class="field input-field">
+                            <input type="email" placeholder="Email" class="input">
+                        </div>
 
-                    <div class="field input-field">
-                        <input type="password" placeholder="Password" class="password">
-                        <i class='bx bx-hide eye-icon'></i>
-                    </div>
+                        <div class="field input-field">
+                            <input type="password" placeholder="Password" class="password">
+                            <i class='bx bx-hide eye-icon'></i>
+                        </div>
+
+                        <div class="form-link">
+                            <a href="#" class="link forget-password-link">Forgot password?</a>
+                        </div>
+
+                        <div class="field button-field">
+                            <button>Login</button>  
+                        </div>
+                    </form>
 
                     <div class="form-link">
-                        <a href="#" class="link forget-password-link">Forgot password?</a>
+                        <span>Don't have an account? <a href="#" class="link signup-link">Signup</a></span>
                     </div>
+                </div>
 
-                    <div class="field button-field">
-                        <button>Login</button>  
-                    </div>
-                </form>
+                <div class="line"></div>
 
-                <div class="form-link">
-                    <span>Don't have an account? <a href="#" class="link signup-link">Signup</a></span>
+                <div class="media-options">
+                    <a href="#" class="field facebook">
+                        <i class='bx bxl-facebook facebook-icon'></i>
+                        <span>Login with Facebook</span>
+                    </a>
+                </div>
+
+                <div class="media-options">
+                    <a href="#" class="field google">
+                        <img src="/assets/img/google.png" alt="" class="google-img">
+                        <span>Login with Google</span>
+                    </a>
                 </div>
             </div>
 
-            <div class="line"></div>
+            <!-- Signup Form -->
+            <div class="form signup">
+                <div class="form-content">
+                    <header>Signup</header>
+                    <form action="#" id="signup-form">
+                        <div class="field input-field">
+                            <input type="email" placeholder="Email" class="input" id="signup-email" required>
+                        </div>
 
-            <div class="media-options">
-                <a href="#" class="field facebook">
-                    <i class='bx bxl-facebook facebook-icon'></i>
-                    <span>Login with Facebook</span>
-                </a>
-            </div>
+                        <div class="field input-field">
+                            <input type="password" placeholder="Create password" class="password" id="signup-password" required>
+                            <i class='bx bx-hide eye-icon'></i>
+                        </div>
 
-            <div class="media-options">
-                <a href="#" class="field google">
-                    <img src="/assets/img/google.png" alt="" class="google-img">
-                    <span>Login with Google</span>
-                </a>
-            </div>
-        </div>
+                        <div class="field input-field">
+                            <input type="password" placeholder="Confirm password" class="password" id="confirm-password" required>
+                            <i class='bx bx-hide eye-icon'></i>
+                        </div>
 
-        <!-- Signup Form -->
-        <div class="form signup">
-            <div class="form-content">
-                <header>Signup</header>
-                <form action="#" id="signup-form">
-                    <div class="field input-field">
-                        <input type="email" placeholder="Email" class="input" id="signup-email" required>
+                        <!-- OTP Section (Initially Hidden) -->
+                        <div class="field input-field otp-field" style="display: none;">
+                            <input type="text" placeholder="Enter OTP" id="otp" class="input">
+                            <button type="button" id="verify-otp">Verify OTP</button>
+                        </div>
+
+                        <div class="field button-field">
+                            <button type="submit" id="signup-button">Signup</button>
+                        </div>
+                    </form>
+
+                    <div class="form-link">
+                        <span>Already have an account? <a href="#" class="link login-link">Login</a></span>
                     </div>
+                </div>
 
-                    <div class="field input-field">
-                        <input type="password" placeholder="Create password" class="password" id="signup-password" required>
-                        <i class='bx bx-hide eye-icon'></i>
-                    </div>
+                <div class="line"></div>
 
-                    <div class="field input-field">
-                        <input type="password" placeholder="Confirm password" class="password" id="confirm-password" required>
-                        <i class='bx bx-hide eye-icon'></i>
-                    </div>
+                <div class="media-options">
+                    <a href="#" class="field facebook">
+                        <i class='bx bxl-facebook facebook-icon'></i>
+                        <span>Login with Facebook</span>
+                    </a>
+                </div>
 
-                    <!-- OTP Section (Initially Hidden) -->
-                    <div class="field input-field otp-field" style="display: none;">
-                        <input type="text" placeholder="Enter OTP" id="otp" class="input">
-                        <button type="button" id="verify-otp">Verify OTP</button>
-                    </div>
-
-                    <div class="field button-field">
-                        <button type="submit" id="signup-button">Signup</button>
-                    </div>
-                </form>
-
-                <div class="form-link">
-                    <span>Already have an account? <a href="#" class="link login-link">Login</a></span>
+                <div class="media-options">
+                    <a href="#" class="field google">
+                        <img src="/assets/img/google.png" alt="" class="google-img">
+                        <span>Login with Google</span>
+                    </a>
                 </div>
             </div>
 
-            <div class="line"></div>
-
-            <div class="media-options">
-                <a href="#" class="field facebook">
-                    <i class='bx bxl-facebook facebook-icon'></i>
-                    <span>Login with Facebook</span>
-                </a>
-            </div>
-
-            <div class="media-options">
-                <a href="#" class="field google">
-                    <img src="/assets/img/google.png" alt="" class="google-img">
-                    <span>Login with Google</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Forget Password Form -->
-        <div class="form forget-password">
-            <div class="form-content">
-                <header>Forget Password</header>
-                <form action="#">
-                    <div class="field input-field">
-                        <input type="email" placeholder="Enter your email" class="input">
+            <!-- Forget Password Form -->
+            <div class="form forget-password">
+                <div class="form-content">
+                    <header>Forget Password</header>
+                    <form id="forget-password-form">
+                        <div class="field input-field">
+                            <input type="email" id="forget-email" placeholder="Enter your email" class="input" required>
+                        </div>
+            
+                        <div class="field button-field">
+                            <button type="submit">Submit</button>
+                        </div>
+                    </form>
+            
+                    <div class="form-link">
+                        <span>Back to <a href="#" class="link login-link">Login</a></span>
                     </div>
-
-                    <div class="field button-field">
-                        <button>Submit</button>
-                    </div>
-                </form>
-
-                <div class="form-link">
-                    <span>Back to <a href="#" class="link login-link">Login</a></span>
                 </div>
             </div>
-        </div>
 
-    </section>
+            <!-- Set New Password Form -->
+            <div class="form new-password" style="display: none;">
+                <div class="form-content">
+                    <header>Set New Password</header>
+                    <form action="#">
+                        <div class="field input-field">
+                            <input type="password" placeholder="New Password" id="new-password" class="input" required>
+                        </div>
 
-    <!-- JavaScript -->
-    <script src="/assets/js/form.js"></script>
-</body>
+                        <div class="field input-field">
+                            <input type="password" placeholder="Confirm New Password" id="confirm-new-password" class="input" required>
+                        </div>
 
-</html>
-    
+                        <div class="field button-field">
+                            <button type="button" id="submit-new-password">Set Password</button>
+                        </div>
+                    </form>
+
+                    <div class="form-link">
+                        <span>Back to <a href="#" class="link login-link">Login</a></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JavaScript -->
+        <script src="/assets/js/form.js"></script>
+    </body>
+
+    </html>

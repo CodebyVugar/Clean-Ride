@@ -4,8 +4,10 @@ const forms = document.querySelector(".forms"),
     signupForm = document.getElementById("signup-form"),
     otpField = document.querySelector(".otp-field"),
     signupButton = document.getElementById("signup-button"),
-    verifyOtpButton = document.getElementById("verify-otp");
-
+    verifyOtpButton = document.getElementById("verify-otp"),
+    forgetPasswordForm = document.getElementById("forget-password-form"),
+    forgetEmailInput = document.getElementById("forget-email");
+    loginForm = document.querySelector(".login form");
 
 // Password show/hide functionality
 pwShowHide.forEach(eyeIcon => {
@@ -40,9 +42,66 @@ links.forEach(link => {
     });
 });
 
-// Signup form submit handler
-// Signup form submit handler
-let signUpResponse = "";  // Signup cavabını saxlamaq üçün dəyişən
+
+// Login form submit handler
+
+
+loginForm.addEventListener("submit", function (e) {
+
+    e.preventDefault();  // Prevent the form from being submitted automatically
+    const email = document.querySelector(".login input[type='email']").value;
+    const password = document.querySelector(".login input[type='password']").value;
+
+    if (!email || !password) {
+        alert("Please fill in both fields.");
+        return;
+    }
+
+    // API request to validate login credentials
+    fetch('https://e295-94-20-49-98.ngrok-free.app/api/user/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, password: password }),
+    })
+    .then(response => response.text())
+    .then(text => {
+        console.log("Backend response:", text);  // Log the backend response for debugging
+        if (text.includes("success")) {
+            alert("Login successful!");
+            window.location.replace("index.html");  // Redirect to index.html on successful login
+        } else {
+            alert("Invalid credentials. Please try again.");
+        }
+    })
+    .catch(error => {
+        console.error("Error during login:", error);
+        alert("An error occurred during login.");
+    });
+});
+
+
+
+
+// Forget Password form submit handler
+forgetPasswordForm.addEventListener("submit", function (e) {
+    e.preventDefault();  // Formun avtomatik göndərilməsini dayandırırıq
+    const emailInput = forgetEmailInput.value;
+
+    if (!emailInput) {
+        alert("Please enter your email.");
+        return;
+    }
+
+    // OTP göndərmək və ya şifrə sıfırlamaq prosesi burada həyata keçirilə bilər.
+    // Bu vaxt, istifadəçini Signup hissəsinə yönləndiririk.
+    alert("Please register again");
+
+    // Forget Password-dan sonra Signup hissəsinə keçirik
+    forms.classList.add("show-signup");
+    forms.classList.remove("show-forget-password");
+});
 
 // Signup form submit handler
 let email = "";  // Email-i burada saxlayırıq
@@ -94,7 +153,6 @@ signupForm.addEventListener("submit", function (e) {
 // OTP Verification Button Event
 verifyOtpButton.addEventListener("click", function (e) {
     e.preventDefault();  // Bu, səhifənin yenilənməsinin qarşısını alacaq
-    console.log("saadsdsa");
     
     const otp = document.getElementById("otp").value;
     
@@ -114,9 +172,7 @@ verifyOtpButton.addEventListener("click", function (e) {
         console.log("OTP verification response:", text);
         if (text.includes("success")) {
             alert("OTP verified successfully!");
-            console.log("isleyir");
             window.location.replace("index.html");
-            // Signup-u başarılı şəkildə tamamladı
         } else {
             alert("Invalid OTP. Please try again.");
         }
@@ -126,4 +182,3 @@ verifyOtpButton.addEventListener("click", function (e) {
         alert("An error occurred during OTP verification.");
     });
 });
-
