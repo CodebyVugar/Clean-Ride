@@ -32,7 +32,6 @@ document
         console.log(data.emissionPercentage);
         
         localStorage.setItem("transportEmissionKg", data.emissionKg)
-        // localStorage.setItem("emissionPercentage", data.emissionPercentage)
         alert("Form submitted successfully!");
       })
       .catch((error) => {
@@ -82,7 +81,6 @@ document
       })
       .catch((error) => {
         console.error("Error:", error);
-        // Handle error (e.g., show an error message)
         alert("Error submitting data.");
       });
   });
