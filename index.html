@@ -1102,20 +1102,20 @@
               <!-- Meat Consumption -->
               <div class="mb-4">
                 <label
-                  for="meatType"
+                  for="dietType"
                   class="block text-sm font-medium text-gray-700 mb-2"
-                  >Meat Consumption</label
+                  >Diet Type</label
                 >
                 <select
-                  id="meatType"
-                  name="meatType"
+                  id="dietType"
+                  name="dietType"
                   class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                  onchange="handleMeatTypeChange(this)"
+                  onchange="handleDietTypeChange(this)"
                 >
-                  <option value="" disabled selected>Select meat type</option>
-                  <option value="beef">Beef</option>
-                  <option value="chicken">Chicken</option>
-                  <option value="fish">Fish</option>
+                  <option value="" disabled selected>Diet Type</option>
+                  <option value="vegeterian">Vegeterian</option>
+                  <option value="vegan">Vegan</option>
+                  <option value="omnivores">Omnivores</option>
                 </select>
               </div>
               <div id="meatWeightField" class="hidden">
@@ -2021,7 +2021,7 @@
       }
 
       // Handle showing/hiding the meat weight field based on meat type selection
-      function handleMeatTypeChange(select) {
+      function handleDietTypeChange(select) {
         const meatWeightField = document.getElementById("meatWeightField");
         if (select.value) {
           meatWeightField.classList.remove("hidden");
