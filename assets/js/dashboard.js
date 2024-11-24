@@ -21,47 +21,29 @@ function closeSidebar() {
 
 // ---------- CHARTS ----------
 
-
-app.use(cors());
-
-const url = "https://8c3a-94-20-49-98.ngrok-free.app/co2-emissions";
-
-// Send a GET request
+const url = "https://e61d-94-20-49-98.ngrok-free.app/emissions";
 
 const fetchData = async () => {
-    try {
-      const response = await fetch("https://8c3a-94-20-49-98.ngrok-free.app/co2-emissions");
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-  
-      const text = await response.text(); // Read the raw response as text
-      console.log("Response Body:", text);
-  
-      try {
-        // Attempt to parse JSON
-        const data = JSON.parse(text);
-        console.log("Parsed Data:", data);
-      } catch (jsonError) {
-        console.error("Error parsing JSON:", jsonError);
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
-  
-  fetchData();
-  
+  const response = await fetch(url);
 
-const transportation = "";
-const shopping = "";
-const lifeStyle = "";
+  const data = await response.json();
+
+  console.log(data, "data");
+};
+
+fetchData();
+
+const transportation = parseFloat(
+  localStorage.getItem("transportEmissionKg")
+).toFixed(2);
+const shopping = parseFloat(localStorage.getItem("shopEmissionKg")).toFixed(2);
+const lifeStyle = parseFloat(localStorage.getItem("lifeEmissionKg")).toFixed(2);
 
 // BAR CHART
 const barChartOptions = {
   series: [
     {
-      data: [10, 8, 9],
+      data: [transportation, shopping, lifeStyle],
     },
   ],
   chart: {
@@ -87,7 +69,7 @@ const barChartOptions = {
     show: false,
   },
   xaxis: {
-    categories: ["Laptop", "Phone", "Monitor", "Headphones", "Camera"],
+    categories: ["Transportation", "Shopping", "Life Style"],
   },
   yaxis: {
     title: {
@@ -106,12 +88,16 @@ barChart.render();
 const areaChartOptions = {
   series: [
     {
-      name: "Purchase Orders",
-      data: [31, 40, 28, 99, 100, 109, 100],
+      name: "Transportation",
+      data: [0, transportation],
     },
     {
-      name: "Sales Orders",
-      data: [11, 32, 45, 32, 34, 52, 41],
+      name: "Shopping",
+      data: [0, shopping],
+    },
+    {
+      name: "Life Style",
+      data: [0, lifeStyle],
     },
   ],
   chart: {
@@ -121,7 +107,7 @@ const areaChartOptions = {
       show: false,
     },
   },
-  colors: ["#4f35a1", "#246dec"],
+  colors: ["#4f35a1", "#246dec", "#fa56e7"],
   dataLabels: {
     enabled: false,
   },
@@ -135,13 +121,17 @@ const areaChartOptions = {
   yaxis: [
     {
       title: {
-        text: "Purchase Orders",
+        text: "Transportation",
       },
     },
     {
-      opposite: true,
       title: {
-        text: "Sales Orders",
+        text: "Shopping",
+      },
+    },
+    {
+      title: {
+        text: "Life Style",
       },
     },
   ],

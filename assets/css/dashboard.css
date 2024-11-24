@@ -68,8 +68,8 @@ body {
 #sidebar {
   grid-area: sidebar;
   height: 100%;
-  background-color: #21232d;
-  color: #9799ab;
+  background-color: #018374;
+  color: white;
   overflow-y: auto;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
@@ -110,7 +110,7 @@ body {
 
 .sidebar-list-item > a {
   text-decoration: none;
-  color: #9799ab;
+  color: white;
 }
 
 .sidebar-responsive {
