@@ -6,6 +6,7 @@ const forms = document.querySelector(".forms"),
     signupButton = document.getElementById("signup-button"),
     verifyOtpButton = document.getElementById("verify-otp");
 
+
 // Password show/hide functionality
 pwShowHide.forEach(eyeIcon => {
     eyeIcon.addEventListener("click", () => {
@@ -40,10 +41,16 @@ links.forEach(link => {
 });
 
 // Signup form submit handler
-signupForm.addEventListener("submit", function (e) {
-    e.preventDefault();  // Prevent form from submitting
+// Signup form submit handler
+let signUpResponse = "";  // Signup cavabını saxlamaq üçün dəyişən
 
-    const email = document.getElementById("signup-email").value;
+// Signup form submit handler
+let email = "";  // Email-i burada saxlayırıq
+
+signupForm.addEventListener("submit", function (e) {
+    e.preventDefault();  // Formun avtomatik göndərilməsini dayandırırıq
+
+    const emailInput = document.getElementById("signup-email").value;
     const password = document.getElementById("signup-password").value;
     const confirmPassword = document.getElementById("confirm-password").value;
 
@@ -52,21 +59,71 @@ signupForm.addEventListener("submit", function (e) {
         return;
     }
 
-    // If validation passed, show OTP field
-    otpField.style.display = "block";
-    signupButton.style.display = "none";  // Hide the Signup button after OTP field appears
-    verifyOtpButton.style.display = "inline-block";  // Show Verify OTP button
+    // API-yə signup məlumatlarını göndəririk
+    fetch('https://e295-94-20-49-98.ngrok-free.app/api/user/sign-up', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: emailInput, password: password }),
+    })
+    .then(response => response.text())
+    .then(text => {
+        console.log("Backend response:", text);  // Backend-dən gələn mətni konsola yazdırmaq
+        if (text.includes("success")) {
+            alert("Signup successful! Please verify OTP.");
+            otpField.style.display = "block";
+            signupButton.style.display = "none";
+            verifyOtpButton.style.display = "inline-block";
+
+            // Email-i qeyd edirik ki, OTP təsdiqləmə zamanı göndərək
+            email = emailInput;
+
+            // OTP səhifəsinə yönləndiririk
+            window.location.href = "#otp-section";  // OTP bölməsinə yönləndiririk
+        } else {
+            alert("Signup failed! Please try again.");
+        }
+    })
+    .catch(error => {
+        console.error("Error during signup:", error);
+        alert("An error occurred during signup.");
+    });
 });
 
 // OTP Verification Button Event
-verifyOtpButton.addEventListener("click", function () {
+verifyOtpButton.addEventListener("click", function (e) {
+    e.preventDefault();  // Bu, səhifənin yenilənməsinin qarşısını alacaq
+    console.log("saadsdsa");
+    
     const otp = document.getElementById("otp").value;
-
-    // This part would normally verify OTP with backend
-    if (otp === "123456") {  // Example of correct OTP
-        alert("OTP verified successfully!");
-        // Proceed with signup after OTP is verified (e.g., send data to backend)
-    } else {
-        alert("Invalid OTP. Please try again.");
-    }
+    
+    // OTP requestini backend-ə göndəririk
+    fetch('https://e295-94-20-49-98.ngrok-free.app/api/user/verify-otp', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            email: email,  // Signup-dan əldə etdiyimiz email
+            otp: otp       // İstifadəçinin daxil etdiyi OTP
+        }),
+    })
+    .then(response => response.text())
+    .then(text => {
+        console.log("OTP verification response:", text);
+        if (text.includes("success")) {
+            alert("OTP verified successfully!");
+            console.log("isleyir");
+            window.location.replace("index.html");
+            // Signup-u başarılı şəkildə tamamladı
+        } else {
+            alert("Invalid OTP. Please try again.");
+        }
+    })
+    .catch(error => {
+        console.error("Error during OTP verification:", error);
+        alert("An error occurred during OTP verification.");
+    });
 });
+
